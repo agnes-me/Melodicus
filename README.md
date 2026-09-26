@@ -26,8 +26,8 @@ Application web pour apprendre aux enfants la **lecture de notes** (clé de sol,
 
 ### Option 1 — GitHub Pages (gratuit, recommandé)
 
-1. À chaque mise à jour de la branche par défaut, les tests sont lancés puis le dossier `app/` est copié sur la branche `gh-pages`.
-2. Une seule fois : dans le dépôt GitHub, **Settings → Pages → Source : Deploy from a branch**, branche **`gh-pages`**, dossier **`/ (root)`**, puis **Save**.
+1. Une seule fois : dans le dépôt GitHub, **Settings → Pages → Source : GitHub Actions** (sans cliquer sur « Configure »).
+2. À chaque mise à jour de la branche par défaut, les tests sont lancés puis le dossier `app/` est publié automatiquement.
 3. Le site est en ligne à l'adresse `https://<compte>.github.io/<dépôt>/`.
 4. Sur la tablette, ouvrir cette adresse puis **« Ajouter à l'écran d'accueil »**.
 
