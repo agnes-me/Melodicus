@@ -26,9 +26,9 @@ Application web pour apprendre aux enfants la **lecture de notes** (clé de sol,
 
 ### Option 1 — GitHub Pages (gratuit, recommandé)
 
-1. Fusionner le code sur la branche `main`.
+1. Le site est publié depuis la **branche par défaut** du dépôt.
 2. Dans le dépôt GitHub : **Settings → Pages → Source : GitHub Actions**.
-3. À chaque mise à jour de `main`, les tests sont lancés puis le site est publié à l'adresse `https://<compte>.github.io/<dépôt>/`.
+3. À chaque mise à jour de la branche par défaut, les tests sont lancés puis le site est publié à l'adresse `https://<compte>.github.io/<dépôt>/`.
 4. Sur la tablette, ouvrir cette adresse puis **« Ajouter à l'écran d'accueil »**.
 
 > ℹ️ GitHub Pages est gratuit pour les dépôts **publics**. Pour un dépôt privé, il faut un compte payant : dans ce cas, utiliser l'option 2 ou un autre hébergeur statique gratuit (Cloudflare Pages, Netlify) en pointant sur le dossier `app/`.
