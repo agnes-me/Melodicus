@@ -1,5 +1,5 @@
 // Service worker : met l'application en cache pour qu'elle fonctionne hors connexion.
-const VERSION = 'melodicus-v1';
+const VERSION = 'melodicus-v2';
 const FILES = [
   './',
   'index.html',

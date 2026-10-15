@@ -23,6 +23,7 @@ export function newProfile(name, avatar = '🎵', color = '#7c5cff') {
     color,
     createdAt: new Date().toISOString(),
     answerMode: 'names', // 'names' | 'keyboard'
+    chordNotation: 'fr', // noms des accords : 'fr' (Do, Ré…) | 'en' (C, D…)
     instruments: { guitar: false },
     progress: {}, // exId → { unlocked, stars: {level: n}, best: {level: n} }
     items: {}, // exId → itemKey → { ok, ko, ms }

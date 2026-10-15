@@ -15,7 +15,7 @@ Application web pour apprendre aux enfants la **lecture de notes** (clé de sol,
 | 🎼 Lecture de notes | Clé de sol (5 niveaux), clé de fa (5 niveaux), les deux clés mélangées (débloqué après le niveau 2 de chaque clé). Réponse par le nom de la note ou au clavier. Mode libre ou chrono (1 minute). |
 | 🎶 Solfège | Valeurs des notes et silences, reconnaître un rythme, frapper un rythme (tambour à taper en mesure), dièse / bémol / bécarre, clavier et gamme de do. |
 | 👂 Oreille musicale | Ça monte ou ça descend ?, intervalles (seconde → octave), petites dictées mélodiques, majeur ou mineur. |
-| 🎸 Guitare *(activable par profil)* | Nom ↔ diagramme, accords à l'oreille, majeur/mineur à la guitare, changements d'accords chronométrés, page « Mes accords » (diagramme + son + notes sur la portée). |
+| 🎸 Guitare *(activable par profil)* | 25 accords (majeurs, mineurs, septièmes, barrés) d’après la fiche du professeur, noms en notation française (Do, Ré…) ou anglo-saxonne (C, D…) au choix ; nom ↔ diagramme, accords à l'oreille, majeur/mineur à la guitare, changements d'accords chronométrés, page « Mes accords » (diagramme + son + notes sur la portée). |
 | 🎤 Accordeur | Guitare (mi-la-ré-sol-si-mi) et ukulélé (sol-do-mi-la), aiguille trop grave / juste / trop aigu, accessible sans profil. |
 
 **Progression** : chaque exercice a des niveaux ; 8 bonnes réponses sur 10 débloquent le niveau suivant (1 à 3 étoiles). Les questions ratées reviennent plus souvent. Badges, série de jours consécutifs 🔥, records personnels en mode chrono.

@@ -7,9 +7,9 @@ import {
 } from './progress.js';
 import { audio, successSound, errorSound, strum } from './audio.js';
 import { tunerScreen } from './tuner.js';
-import { CHORD_LEVELS, chordById, chordDiagram, chordMidi } from './guitar.js';
+import { CHORD_LEVELS, chordById, chordDiagram, chordMidi, chordName } from './guitar.js';
 import { drawStaff } from './staff.js';
-import { parse, vexKey, nameFr } from './music.js';
+import { parse, vexKey, noteName } from './music.js';
 
 const app = document.getElementById('app');
 let cleanup = null; // fonction d'arrêt de l'écran courant (micro, minuteurs…)
@@ -136,6 +136,17 @@ function newProfileScreen() {
   name.focus();
 }
 
+/** Choix de la notation des accords : Do Ré Mi… ou C D E… (enregistré dans le profil). */
+function notationToggle(p, onChange = render) {
+  const current = p.chordNotation || 'fr';
+  return h('div.segmented', [['fr', 'Do, Ré, Mi…'], ['en', 'C, D, E…']].map(([k, label]) =>
+    h('button.seg' + (current === k ? '.is-on' : ''), {
+      type: 'button',
+      'aria-pressed': current === k ? 'true' : 'false',
+      onclick: () => { p.chordNotation = k; store.save(); onChange(); },
+    }, label)));
+}
+
 function profileSettings() {
   const p = store.current();
   const mode = h('div.segmented', [['names', 'Avec les noms (do, ré, mi…)'], ['keyboard', 'Avec le clavier 🎹']].map(([k, label]) =>
@@ -148,6 +159,7 @@ function profileSettings() {
       h('h2', p.name),
       h('div.field', h('span', 'Pour lire les notes, je réponds :'), mode),
       h('label.switch', guitar, h('span', '🎸 Je joue de la guitare (module accords)')),
+      h('div.field', h('span', 'Noms des accords :'), notationToggle(p)),
       h('button.btn', { type: 'button', onclick: () => go('profils') }, '👥 Changer de joueur')),
   );
 }
@@ -212,6 +224,7 @@ function moduleScreen(id) {
       h('span.ex-text', h('span.ex-title', e.title), h('span.ex-desc', lock || e.desc)),
       e.activity ? null : h('span.ex-level', `Niv. ${Math.min(unlocked, e.levels.length)}/${e.levels.length}`));
     })),
+    id === 'guitare' ? h('div.field.notation-field', h('span', 'Noms des accords :'), notationToggle(p)) : null,
     id === 'guitare' ? h('button.btn.btn-wide', { type: 'button', onclick: () => go('accords') }, '📖 Mes accords (diagrammes, sons et notes)') : null,
   );
 }
@@ -424,17 +437,21 @@ function tunerRoute() {
 }
 
 function chordsScreen() {
+  const notation = store.current().chordNotation || 'fr';
   const main = screen(topbar('📖 Mes accords', 'module/guitare'));
+  main.append(h('div.field.notation-field', h('span', 'Noms des accords :'), notationToggle(store.current())));
   CHORD_LEVELS.forEach((lvl, i) => {
     const ids = i === 0 ? lvl.ids : lvl.ids.filter((id) => !CHORD_LEVELS.slice(0, i).some((l) => l.ids.includes(id)));
+    if (!ids.length) return;
     main.append(h('h2.section', lvl.label));
     main.append(h('div.chord-grid', ids.map((id) => {
       const c = chordById[id];
       const staff = h('div.staff.staff-chord');
       const card = h('div.chord-card',
-        chordDiagram(c),
+        chordDiagram(c, { notation }),
+        h('p.chord-alt', notation === 'en' ? chordName(c, 'fr') : chordName(c, 'en')),
         staff,
-        h('p.chord-notes', 'Notes : ' + c.tones.map((t) => nameFr(parse(t))).join(' – ')),
+        h('p.chord-notes', 'Notes : ' + c.tones.map((t) => noteName(parse(t), notation)).join(' – ')),
         h('button.btn.btn-play', { type: 'button', onclick: () => strum(chordMidi(c)) }, '🔊 Écouter'));
       queueMicrotask(() => drawStaff(staff, { width: 150, notes: [{ keys: c.tones.map((t) => vexKey(parse(t))), duration: 'w', accidentals: c.tones.map((t) => (t.includes('#') ? '#' : /^[A-G]b/.test(t) ? 'b' : null)) }] }));
       return card;
@@ -557,7 +574,7 @@ function errorLabel(e, key) {
   if (m) return `${NOTE_FR[m[2]]}${m[3] === '#' ? '♯' : m[3] === 'b' ? '♭' : ''}${m[4]} ${m[1] === 'treble' ? '𝄞' : '𝄢'}`;
   const n = /^([A-G])(#|b)?(\d)$/.exec(key);
   if (n) return `${NOTE_FR[n[1]]}${n[2] === '#' ? '♯' : n[2] === 'b' ? '♭' : ''}`;
-  if (chordById[key] && e.module === 'guitare') return chordById[key].name;
+  if (chordById[key] && e.module === 'guitare') return `${chordName(chordById[key], 'fr')} (${chordName(chordById[key], 'en')})`;
   return key;
 }
 

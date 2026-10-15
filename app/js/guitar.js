@@ -5,32 +5,71 @@ export const GUITAR_TUNING = [40, 45, 50, 55, 59, 64]; // mi2 la2 ré3 sol3 si3 
 
 // frets : de la corde de mi grave à la corde de mi aigu ; -1 = corde non jouée, 0 = à vide.
 // fingers : numéro du doigt (1 index … 4 auriculaire).
+// Doigtés des accords ouverts repris de la fiche « Accords ouverts » du professeur de guitare.
+// root + quality ('' majeur, 'm' mineur, '7' septième) servent à construire le nom dans les deux notations.
 export const CHORDS = [
-  { id: 'C', name: 'Do', frets: [-1, 3, 2, 0, 1, 0], fingers: [0, 3, 2, 0, 1, 0], tones: ['C4', 'E4', 'G4'], kind: 'majeur' },
-  { id: 'D', name: 'Ré', frets: [-1, -1, 0, 2, 3, 2], fingers: [0, 0, 0, 1, 3, 2], tones: ['D4', 'F#4', 'A4'], kind: 'majeur' },
-  { id: 'E', name: 'Mi', frets: [0, 2, 2, 1, 0, 0], fingers: [0, 2, 3, 1, 0, 0], tones: ['E4', 'G#4', 'B4'], kind: 'majeur' },
-  { id: 'G', name: 'Sol', frets: [3, 2, 0, 0, 0, 3], fingers: [2, 1, 0, 0, 0, 3], tones: ['G4', 'B4', 'D5'], kind: 'majeur' },
-  { id: 'A', name: 'La', frets: [-1, 0, 2, 2, 2, 0], fingers: [0, 0, 1, 2, 3, 0], tones: ['A4', 'C#5', 'E5'], kind: 'majeur' },
-  { id: 'Am', name: 'La mineur', frets: [-1, 0, 2, 2, 1, 0], fingers: [0, 0, 2, 3, 1, 0], tones: ['A4', 'C5', 'E5'], kind: 'mineur' },
-  { id: 'Dm', name: 'Ré mineur', frets: [-1, -1, 0, 2, 3, 1], fingers: [0, 0, 0, 2, 3, 1], tones: ['D4', 'F4', 'A4'], kind: 'mineur' },
-  { id: 'Em', name: 'Mi mineur', frets: [0, 2, 2, 0, 0, 0], fingers: [0, 2, 3, 0, 0, 0], tones: ['E4', 'G4', 'B4'], kind: 'mineur' },
-  { id: 'Fs', name: 'Fa (petit)', frets: [-1, -1, 3, 2, 1, 1], fingers: [0, 0, 3, 2, 1, 1], barre: { fret: 1, from: 4, to: 5 }, tones: ['F4', 'A4', 'C5'], kind: 'majeur' },
-  { id: 'B7', name: 'Si 7', frets: [-1, 2, 1, 2, 0, 2], fingers: [0, 2, 1, 3, 0, 4], tones: ['B3', 'D#4', 'F#4', 'A4'], kind: 'septième' },
-  { id: 'F', name: 'Fa (barré)', frets: [1, 3, 3, 2, 1, 1], fingers: [1, 3, 4, 2, 1, 1], barre: { fret: 1, from: 0, to: 5 }, tones: ['F4', 'A4', 'C5'], kind: 'majeur' },
-  { id: 'Fm', name: 'Fa mineur', frets: [1, 3, 3, 1, 1, 1], fingers: [1, 3, 4, 1, 1, 1], barre: { fret: 1, from: 0, to: 5 }, tones: ['F4', 'Ab4', 'C5'], kind: 'mineur' },
-  { id: 'B', name: 'Si', frets: [-1, 2, 4, 4, 4, 2], fingers: [0, 1, 2, 3, 4, 1], barre: { fret: 2, from: 1, to: 5 }, tones: ['B3', 'D#4', 'F#4'], kind: 'majeur' },
-  { id: 'Bm', name: 'Si mineur', frets: [-1, 2, 4, 4, 3, 2], fingers: [0, 1, 3, 4, 2, 1], barre: { fret: 2, from: 1, to: 5 }, tones: ['B3', 'D4', 'F#4'], kind: 'mineur' },
-  { id: 'Cm', name: 'Do mineur', frets: [-1, 3, 5, 5, 4, 3], fingers: [0, 1, 3, 4, 2, 1], barre: { fret: 3, from: 1, to: 5 }, tones: ['C4', 'Eb4', 'G4'], kind: 'mineur' },
-  { id: 'Gm', name: 'Sol mineur', frets: [3, 5, 5, 3, 3, 3], fingers: [1, 3, 4, 1, 1, 1], barre: { fret: 3, from: 0, to: 5 }, tones: ['G4', 'Bb4', 'D5'], kind: 'mineur' },
+  // Accords majeurs ouverts
+  { id: 'C', root: 'C', quality: '', frets: [-1, 3, 2, 0, 1, 0], fingers: [0, 3, 2, 0, 1, 0], tones: ['C4', 'E4', 'G4'] },
+  { id: 'D', root: 'D', quality: '', frets: [-1, -1, 0, 2, 3, 2], fingers: [0, 0, 0, 1, 3, 2], tones: ['D4', 'F#4', 'A4'] },
+  { id: 'E', root: 'E', quality: '', frets: [0, 2, 2, 1, 0, 0], fingers: [0, 2, 3, 1, 0, 0], tones: ['E4', 'G#4', 'B4'] },
+  { id: 'F', root: 'F', quality: '', frets: [-1, -1, 3, 2, 1, 1], fingers: [0, 0, 3, 2, 1, 1], barre: { fret: 1, from: 4, to: 5 }, tones: ['F4', 'A4', 'C5'] },
+  { id: 'G', root: 'G', quality: '', frets: [3, 2, 0, 0, 3, 3], fingers: [2, 1, 0, 0, 3, 4], tones: ['G4', 'B4', 'D5'] },
+  { id: 'A', root: 'A', quality: '', frets: [-1, 0, 2, 2, 2, 0], fingers: [0, 0, 1, 2, 3, 0], tones: ['A4', 'C#5', 'E5'] },
+  // Accords mineurs ouverts
+  { id: 'Cm', root: 'C', quality: 'm', frets: [-1, 3, 1, 0, 1, -1], fingers: [0, 3, 1, 0, 2, 0], tones: ['C4', 'Eb4', 'G4'] },
+  { id: 'Dm', root: 'D', quality: 'm', frets: [-1, -1, 0, 2, 3, 1], fingers: [0, 0, 0, 2, 3, 1], tones: ['D4', 'F4', 'A4'] },
+  { id: 'Em', root: 'E', quality: 'm', frets: [0, 2, 2, 0, 0, 0], fingers: [0, 2, 3, 0, 0, 0], tones: ['E4', 'G4', 'B4'] },
+  { id: 'Fm', root: 'F', quality: 'm', frets: [-1, -1, 3, 1, 1, 1], fingers: [0, 0, 3, 1, 1, 1], barre: { fret: 1, from: 3, to: 5 }, tones: ['F4', 'Ab4', 'C5'] },
+  { id: 'Gm', root: 'G', quality: 'm', frets: [3, 1, 0, 0, 3, 3], fingers: [2, 1, 0, 0, 3, 4], tones: ['G4', 'Bb4', 'D5'] },
+  { id: 'Am', root: 'A', quality: 'm', frets: [-1, 0, 2, 2, 1, 0], fingers: [0, 0, 2, 3, 1, 0], tones: ['A4', 'C5', 'E5'] },
+  // Accords de septième ouverts
+  { id: 'C7', root: 'C', quality: '7', frets: [-1, 3, 2, 3, 1, 0], fingers: [0, 3, 2, 4, 1, 0], tones: ['C4', 'E4', 'G4', 'Bb4'] },
+  { id: 'D7', root: 'D', quality: '7', frets: [-1, -1, 0, 2, 1, 2], fingers: [0, 0, 0, 2, 1, 3], tones: ['D4', 'F#4', 'A4', 'C5'] },
+  { id: 'E7', root: 'E', quality: '7', frets: [0, 2, 0, 1, 0, 0], fingers: [0, 2, 0, 1, 0, 0], tones: ['E4', 'G#4', 'B4', 'D5'] },
+  { id: 'F7', root: 'F', quality: '7', frets: [-1, -1, 1, 2, 1, 1], fingers: [0, 0, 1, 2, 1, 1], barre: { fret: 1, from: 2, to: 5 }, tones: ['F4', 'A4', 'C5', 'Eb5'] },
+  { id: 'G7', root: 'G', quality: '7', frets: [3, 2, 0, 0, 0, 1], fingers: [3, 2, 0, 0, 0, 1], tones: ['G4', 'B4', 'D5', 'F5'] },
+  { id: 'A7', root: 'A', quality: '7', frets: [-1, 0, 2, 0, 2, 0], fingers: [0, 0, 2, 0, 3, 0], tones: ['A4', 'C#5', 'E5', 'G5'] },
+  { id: 'B7', root: 'B', quality: '7', frets: [-1, 2, 1, 2, 0, 2], fingers: [0, 2, 1, 3, 0, 4], tones: ['B3', 'D#4', 'F#4', 'A4'] },
+  // Accords barrés
+  { id: 'F-barre', root: 'F', quality: '', variant: 'barre', frets: [1, 3, 3, 2, 1, 1], fingers: [1, 3, 4, 2, 1, 1], barre: { fret: 1, from: 0, to: 5 }, tones: ['F4', 'A4', 'C5'] },
+  { id: 'Fm-barre', root: 'F', quality: 'm', variant: 'barre', frets: [1, 3, 3, 1, 1, 1], fingers: [1, 3, 4, 1, 1, 1], barre: { fret: 1, from: 0, to: 5 }, tones: ['F4', 'Ab4', 'C5'] },
+  { id: 'B', root: 'B', quality: '', variant: 'barre', frets: [-1, 2, 4, 4, 4, 2], fingers: [0, 1, 2, 3, 4, 1], barre: { fret: 2, from: 1, to: 5 }, tones: ['B3', 'D#4', 'F#4'] },
+  { id: 'Bm', root: 'B', quality: 'm', variant: 'barre', frets: [-1, 2, 4, 4, 3, 2], fingers: [0, 1, 3, 4, 2, 1], barre: { fret: 2, from: 1, to: 5 }, tones: ['B3', 'D4', 'F#4'] },
+  { id: 'Cm-barre', root: 'C', quality: 'm', variant: 'barre', frets: [-1, 3, 5, 5, 4, 3], fingers: [0, 1, 3, 4, 2, 1], barre: { fret: 3, from: 1, to: 5 }, tones: ['C4', 'Eb4', 'G4'] },
+  { id: 'Gm-barre', root: 'G', quality: 'm', variant: 'barre', frets: [3, 5, 5, 3, 3, 3], fingers: [1, 3, 4, 1, 1, 1], barre: { fret: 3, from: 0, to: 5 }, tones: ['G4', 'Bb4', 'D5'] },
 ];
 
 export const chordById = Object.fromEntries(CHORDS.map((c) => [c.id, c]));
 
+const ROOT_FR = { C: 'Do', D: 'Ré', E: 'Mi', F: 'Fa', G: 'Sol', A: 'La', B: 'Si' };
+
+/**
+ * Nom d'un accord selon la notation choisie :
+ * 'fr' → « Ré mineur », « Sol 7 », « Fa barré » ; 'en' → « Dm », « G7 », « F barré ».
+ */
+export function chordName(chord, notation = 'fr') {
+  const barre = chord.variant === 'barre' && chord.id !== 'B' && chord.id !== 'Bm' ? ' barré' : '';
+  if (notation === 'en') return chord.root + chord.quality + barre;
+  const q = chord.quality === 'm' ? ' mineur' : chord.quality === '7' ? ' 7' : '';
+  return ROOT_FR[chord.root] + q + barre;
+}
+
+/** Les deux notations à la fois, ex. « Ré mineur (Dm) ». */
+export function chordBothNames(chord, notation = 'fr') {
+  const other = notation === 'en' ? 'fr' : 'en';
+  return `${chordName(chord, notation)} (${chordName(chord, other)})`;
+}
+
+const MAJ = ['C', 'D', 'E', 'F', 'G', 'A'];
+const MIN = ['Cm', 'Dm', 'Em', 'Fm', 'Gm', 'Am'];
+const SEVENTH = ['C7', 'D7', 'E7', 'F7', 'G7', 'A7', 'B7'];
+
 export const CHORD_LEVELS = [
-  { label: 'Premiers accords', desc: 'Do, Ré, Mi, Sol, La', ids: ['C', 'D', 'E', 'G', 'A'] },
-  { label: 'Les mineurs', desc: '+ La m, Ré m, Mi m', ids: ['C', 'D', 'E', 'G', 'A', 'Am', 'Dm', 'Em'] },
-  { label: 'Fa et Si 7', desc: '+ petit Fa, Si 7', ids: ['C', 'D', 'E', 'G', 'A', 'Am', 'Dm', 'Em', 'Fs', 'B7'] },
-  { label: 'Accords barrés', desc: 'Fa, Fa m, Si, Si m, Do m, Sol m', ids: ['F', 'Fm', 'B', 'Bm', 'Cm', 'Gm'] },
+  { label: 'Accords majeurs', desc: 'Do, Ré, Mi, Fa, Sol, La', ids: MAJ },
+  { label: 'Accords mineurs', desc: 'Do m, Ré m, Mi m, Fa m, Sol m, La m', ids: MIN },
+  { label: 'Accords de septième', desc: 'Do 7, Ré 7, Mi 7, Fa 7, Sol 7, La 7, Si 7', ids: SEVENTH },
+  { label: 'Tout mélangé', desc: 'Majeurs, mineurs et septièmes', ids: [...MAJ, ...MIN, ...SEVENTH] },
+  { label: 'Accords barrés', desc: 'Fa, Fa m, Si, Si m, Do m, Sol m', ids: ['F-barre', 'Fm-barre', 'B', 'Bm', 'Cm-barre', 'Gm-barre'] },
 ];
 
 /** Notes MIDI réellement jouées par l'accord (grave → aigu). */
@@ -50,7 +89,7 @@ export function tonePitchClasses(chord) {
 const SVGNS = 'http://www.w3.org/2000/svg';
 
 /** Diagramme d'accord (cordes verticales, cases horizontales). */
-export function chordDiagram(chord, { size = 1, showName = true } = {}) {
+export function chordDiagram(chord, { size = 1, showName = true, notation = 'fr' } = {}) {
   const played = chord.frets.filter((f) => f > 0);
   const minFret = Math.min(...played);
   const maxFret = Math.max(...played);
@@ -65,7 +104,7 @@ export function chordDiagram(chord, { size = 1, showName = true } = {}) {
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   svg.setAttribute('class', 'chord-diagram');
   svg.setAttribute('role', 'img');
-  svg.setAttribute('aria-label', `Diagramme de l'accord ${chord.name}`);
+  svg.setAttribute('aria-label', `Diagramme de l'accord ${chordName(chord, notation)}`);
   svg.style.width = `${W * size}px`;
   const el = (name, attrs, text) => {
     const n = document.createElementNS(SVGNS, name);
@@ -74,7 +113,7 @@ export function chordDiagram(chord, { size = 1, showName = true } = {}) {
     svg.append(n);
     return n;
   };
-  if (showName) el('text', { x: W / 2, y: 16, 'text-anchor': 'middle', class: 'cd-name' }, chord.name);
+  if (showName) el('text', { x: W / 2, y: 16, 'text-anchor': 'middle', class: 'cd-name' }, chordName(chord, notation));
   // sillet ou numéro de case
   if (base === 1) el('rect', { x: x0 - 1, y: y0 - 4, width: dx * 5 + 2, height: 4, class: 'cd-nut' });
   else el('text', { x: x0 + dx * 5 + 6, y: y0 + dy * 0.7, class: 'cd-fret-num' }, `${base}`);

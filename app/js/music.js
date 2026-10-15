@@ -59,6 +59,16 @@ export function nameFr(n, withOct = false) {
   return withOct ? `${base} ${n.oct}` : base;
 }
 
+/** Nom anglo-saxon : 'F♯', 'B♭'. */
+export function nameEn(n) {
+  return LETTERS[n.step] + ALT_SYMBOL[n.alt];
+}
+
+/** Nom selon la notation choisie : 'fr' (do, ré, mi…) ou 'en' (C, D, E…). */
+export function noteName(n, notation = 'fr') {
+  return notation === 'en' ? nameEn(n) : nameFr(n);
+}
+
 /** Clé VexFlow : 'f#/4'. */
 export function vexKey(n) {
   return LETTERS[n.step].toLowerCase() + (n.alt === 1 ? '#' : n.alt === -1 ? 'b' : '') + '/' + n.oct;
